@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('id', 'personnelNumber', 'first_name', 'last_name', 'email', 'is_staff', 'is_active', 'date_joined', 'role')
+        fields = ('id', 'personnelNumber', 'first_name', 'last_name', 'email', 'is_staff', 'is_active', 'date_joined', 'role', 'profile_picture')
 
     def get_role(self, obj):
         if hasattr(obj, 'tripadmin') and obj.tripadmin.is_trip_admin:
