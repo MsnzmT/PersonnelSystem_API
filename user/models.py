@@ -109,6 +109,7 @@ class Person(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
     email = models.EmailField(_("email address"), blank=True)
+    profile_picture = models.ImageField(null=True, blank=True, upload_to='user_pictures')
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,
