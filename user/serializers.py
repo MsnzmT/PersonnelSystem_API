@@ -35,5 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
             return 'paysalaryadmin'
         elif hasattr(obj, 'newsadmin') and obj.newsadmin.is_news_admin:
             return 'newsadmin'
+        elif hasattr(obj, 'leaveadmin') and obj.leaveadmin.is_leave_admin:
+            return 'leaveadmin'
         else:
             return 'employee'
