@@ -36,4 +36,4 @@ class UserSerializer(serializers.ModelSerializer):
         elif hasattr(obj, 'newsadmin') and obj.newsadmin.is_news_admin:
             return 'newsadmin'
         else:
-            return None
+            return 'employee'
