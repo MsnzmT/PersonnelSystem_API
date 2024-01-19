@@ -12,4 +12,5 @@ class Employee(Person):
         ("MANAGEMENT","MANAGEMENT"),
     )
     
+    is_employee = models.BooleanField(default=True)
     department = models.CharField(max_length=50, choices=DEPARTMENT_CHOICES, null=True)
