@@ -1,8 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.decorators import APIView
 from rest_framework.permissions import IsAuthenticated
-from .serializers import LeaveSerializer
+from .serializers import LeaveSerializer, LeaveSerializerForManager
 from rest_framework import status
+from rest_framework.generics import ListAPIView
+from .models import Leave
 
 
 
@@ -16,3 +18,36 @@ class LeaveRequestView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SeeAllLeaveRequestsView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = LeaveSerializerForManager
+    queryset = Leave.objects.filter(is_approved=False)
+
+
+class AproveLeaveView(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        leave_id = kwargs['leave_id']
+        leave = Leave.objects.get(id=leave_id)
+        leave.is_approved = True
+        leave.save()
+        return Response(status=status.HTTP_200_OK)
+    
+class RejectLeaveView(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        leave_id = kwargs['leave_id']
+        leave = Leave.objects.get(id=leave_id)
+        leave.is_approved = False
+        leave.save()
+        return Response(status=status.HTTP_200_OK)
+
+
+class SeeAllLeaveRequestsForEmployeeView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = LeaveSerializer
+    def get_queryset(self):
+        user = self.request.user.employee
+        return Leave.objects.filter(employee=user)
