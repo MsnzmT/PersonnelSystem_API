@@ -50,3 +50,12 @@ class PaymentSlipView(APIView):
         obj.is_paid = True
         obj.save()
         return Response({"message": "Slip has been paid successfully."})
+
+
+class PaidSlipForEmployeeView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = SlipSerializer
+
+    def get_queryset(self):
+        user = self.request.user.employee
+        return PaySlip.objects.filter(employee=user, is_paid=True)
