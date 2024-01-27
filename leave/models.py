@@ -17,8 +17,8 @@ class Leave(models.Model):
     )
     
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
     description = models.TextField()
     is_approved = models.BooleanField(default=False)
     reason = models.CharField(max_length=100, choices=REASON_CHOICES)

@@ -51,3 +51,11 @@ class SeeAllLeaveRequestsForEmployeeView(ListAPIView):
     def get_queryset(self):
         personnel_number = self.kwargs.get('personnel_number')
         return Leave.objects.filter(employee__personnelNumber=personnel_number)
+    
+
+class LeaveDetailsView(APIView):
+    
+    def get(self, request, leave_id):
+        leave = Leave.objects.get(id=leave_id)
+        serializer = LeaveSerializerForManager(instance=leave)
+        return Response(serializer.data, status=200)
