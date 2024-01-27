@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import LeaveRequestView, SeeAllLeaveRequestsView, AproveLeaveView, RejectLeaveView, SeeAllLeaveRequestsForEmployeeView
+from .views import LeaveRequestView, SeeAllLeaveRequestsView, AproveLeaveView, RejectLeaveView, SeeAllLeaveRequestsForEmployeeView, LeaveDetailsView
 
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('approve/<int:leave_id>/', AproveLeaveView.as_view()),
     path('reject/<int:leave_id>/', RejectLeaveView.as_view()),
     path('see-all-for-employee/<int:personnel_number>/', SeeAllLeaveRequestsForEmployeeView.as_view()),
+    path('details/<int:leave_id>/', LeaveDetailsView.as_view()),
 ]
