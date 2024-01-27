@@ -1,7 +1,7 @@
 from django.db import models
 from user.models import Person
 from employee.models import Employee
-
+from django.utils import timezone
 
 
 class LeaveAdmin(Person):
@@ -22,3 +22,4 @@ class Leave(models.Model):
     description = models.TextField()
     is_approved = models.BooleanField(default=False)
     reason = models.CharField(max_length=100, choices=REASON_CHOICES)
+    created_at = models.DateField(default=timezone.now)

@@ -24,7 +24,7 @@ class TripView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        trips = Trip.objects.filter(is_approved=False)
+        trips = Trip.objects.filter(is_approved=False).exclude(status='Rejected')
         serializer = RequestTripSerializer(trips, many=True)
         return Response(serializer.data, status=200)
 
@@ -66,10 +66,9 @@ class RejectTripView(APIView):
 
 
 class AllEmployeeTripsView(APIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        user = request.user.employee
-        trips = Trip.objects.filter(employee=user)
+    def get(self, request, personnel_number):
+        trips = Trip.objects.filter(employee__personnelNumber=personnel_number)
         serializer = RequestTripSerializer(trips, many=True)
         return Response(serializer.data, status=200)
