@@ -23,3 +23,4 @@ class Leave(models.Model):
     is_approved = models.BooleanField(default=False)
     reason = models.CharField(max_length=100, choices=REASON_CHOICES)
     created_at = models.DateField(default=timezone.now)
+    status = models.CharField(max_length=50, null=True, default='Pending')

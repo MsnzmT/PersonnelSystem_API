@@ -23,7 +23,7 @@ class LeaveRequestView(APIView):
 class SeeAllLeaveRequestsView(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = LeaveSerializerForManager
-    queryset = Leave.objects.filter(is_approved=False)
+    queryset = Leave.objects.filter(status='Pending')
 
 
 class AproveLeaveView(APIView):
@@ -32,8 +32,9 @@ class AproveLeaveView(APIView):
         leave_id = kwargs['leave_id']
         leave = Leave.objects.get(id=leave_id)
         leave.is_approved = True
+        leave.status = 'Approved'
         leave.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response({"status":"ok"},status=200)
     
 class RejectLeaveView(APIView):
     permission_classes = [IsAuthenticated]
@@ -41,8 +42,9 @@ class RejectLeaveView(APIView):
         leave_id = kwargs['leave_id']
         leave = Leave.objects.get(id=leave_id)
         leave.is_approved = False
+        leave.status = 'Rejected'
         leave.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response({"status":"ok"},status=200)
 
 
 class SeeAllLeaveRequestsForEmployeeView(ListAPIView):
