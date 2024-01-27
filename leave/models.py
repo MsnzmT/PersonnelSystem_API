@@ -11,11 +11,9 @@ class LeaveAdmin(Person):
 class Leave(models.Model):
     
     REASON_CHOICES = (
-        ('Sick', 'Sick'),
-        ('Marriage', 'Marriage'),
-        ('Death', 'Death'),
-        ('Childbirth', 'Childbirth'),
-        ('Other', 'Other'),
+        ('اعیاد رسمی', 'اعیاد رسمی'),
+        ('معمولی', 'معمولی'),
+        ('اضطراری', 'اضطراری'),
     )
     
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
