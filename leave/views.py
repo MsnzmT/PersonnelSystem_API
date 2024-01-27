@@ -46,8 +46,8 @@ class RejectLeaveView(APIView):
 
 
 class SeeAllLeaveRequestsForEmployeeView(ListAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     serializer_class = LeaveSerializer
     def get_queryset(self):
-        user = self.request.user.employee
-        return Leave.objects.filter(employee=user)
+        personnel_number = self.kwargs.get('personnel_number')
+        return Leave.objects.filter(employee__personnelNumber=personnel_number)

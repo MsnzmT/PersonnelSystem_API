@@ -53,9 +53,9 @@ class PaymentSlipView(APIView):
 
 
 class PaidSlipForEmployeeView(ListAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     serializer_class = SlipSerializer
 
     def get_queryset(self):
-        user = self.request.user.employee
-        return PaySlip.objects.filter(employee=user, is_paid=True)
+        personnelNumber = self.kwargs.get('personnelNumber')
+        return PaySlip.objects.filter(employee__personnelNumber=personnelNumber)

@@ -7,5 +7,5 @@ urlpatterns = [
     path('detail/<int:trip_id>/', TripEmployeeDetailView.as_view()),
     path('accept/<int:trip_id>/', AcceptTripView.as_view()),
     path('reject/<int:trip_id>/', RejectTripView.as_view()),
-    path('all/', AllEmployeeTripsView.as_view()),
+    path('all/<int:personnel_number>/', AllEmployeeTripsView.as_view()),
 ]
