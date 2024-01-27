@@ -10,7 +10,7 @@ class RequestTripSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Trip
-        fields = ('id', 'source', 'destination', 'type', 'datetime', 'seat', 'employee_detail')
+        fields = ('id', 'source', 'destination', 'type', 'datetime', 'seat', 'trip_created', 'employee_detail')
     
     def create(self, validated_data):
         user = self.context['request'].user.employee

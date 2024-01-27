@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import Person
 from employee.models import Employee
+from django.utils import timezone
 # Create your models here.
 
 class TripAdmin(Person):
@@ -17,3 +18,4 @@ class Trip(models.Model):
     type = models.CharField(max_length=50, null=True)
     is_approved = models.BooleanField(default=False)
     status = models.CharField(max_length=50, null=True, default='Pending')
+    trip_created = models.DateField(default=timezone.now)
