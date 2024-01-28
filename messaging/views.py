@@ -3,7 +3,7 @@ from rest_framework.decorators import APIView
 from rest_framework.response import Response
 from employee.models import Employee
 from .models import Conversation, Message
-from .serializers import ConversationSerializer, ConversationSerializer2, MessageSerializer
+from .serializers import ConversationSerializer, ConversationSerializer2
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
@@ -37,4 +37,4 @@ class MessagingView(APIView):
 class ConversationMessagesView(APIView):
     def get(self, request, conversation_id):
         conversation = Conversation.objects.get(id=conversation_id)
-        return Response(MessageSerializer(conversation.messages, many=True).data, status=200)
+        return Response(ConversationSerializer(conversation).data, status=200)
