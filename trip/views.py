@@ -45,8 +45,10 @@ class AcceptTripView(APIView):
     def post(self, request, trip_id):
         trip = Trip.objects.get(id=trip_id)
         trip.is_approved = True
-        if trip.type == 'havayi':
+        if trip.type == 'هوایی':
             trip.status = 'Send to Airline'
+        elif trip.type == 'دریایی':
+            trip.status == 'Send to AliBaba'
         else:
             trip.status = 'Accepted'
         trip.save()
